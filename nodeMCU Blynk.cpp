@@ -1,15 +1,15 @@
 #include <ESP8266WiFi.h>
 #include <BlynkSimpleEsp8266.h>
 #define BLYNK_PRINT Serial
-char auth[] = "70edd107bcb34973ab2714648d086f6c";
-char ssid[] = "helloworld";
-char pass[] = "KIBEmJ6i";
+char auth[] = "70edd107bcb34973ab2714648d086f6c"; //Blynk üzerinden gönderilen auth kodu girilicek.
+char ssid[] = "helloworld"; // SSID girilecek
+char pass[] = "**********"; //Buraya password girilecek
 int ledk = 16;
-WidgetTerminal terminal(V1);
-WidgetLED led(V0);
-BLYNK_WRITE(V1)
+WidgetTerminal terminal(V1); // Terminal widgetının v1' e bağlı olduğunu gösteriyoruz.
+WidgetLED led(V0); // Led eklentisi V0'a bağlı olduğunu gösteriyoruz .
+BLYNK_WRITE(V1) 
 {
-  String x = param.asStr();
+  String x = param.asStr();    //param.asStr() Blynk'e ait bir koddur terminalden yazılan textin ne olduğunu atayabilmemizi sağlar . 
   Serial.println(x);
   if (String("ac") == param.asStr())
   {
@@ -25,13 +25,13 @@ BLYNK_WRITE(V1)
   }
   else if (String("temizle") == param.asStr())
   {
-    terminal.clear();
+    terminal.clear(); // terminali temizler.
   }
 }
 
 void setup()
 {
-  Serial.begin(9600);
+  Serial.begin(9600); 
   Blynk.begin(auth, ssid, pass);
   pinMode(ledk, OUTPUT);
 }
